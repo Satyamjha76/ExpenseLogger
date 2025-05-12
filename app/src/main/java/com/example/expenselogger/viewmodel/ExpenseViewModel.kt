@@ -20,7 +20,6 @@ class ExpenseViewModel(application: Application):AndroidViewModel(application) {
         allexpenses=repository.getAllExpenses()
         totalamount=repository.getTotalAmount()
     }
-
     fun insert(expense: Expense){
         viewModelScope.launch {
             repository.insertexpense(expense)

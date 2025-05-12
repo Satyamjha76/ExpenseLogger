@@ -3,6 +3,9 @@ package com.example.expenselogger.view
 import android.app.Application
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
@@ -41,9 +44,6 @@ class MainActivity : AppCompatActivity() {
         expenseAdapter = ExpenseAdapter(this,expenseViewModel)
         binding.rv.layoutManager = LinearLayoutManager(this)
         binding.rv.adapter = expenseAdapter
-
-
-
         expenseViewModel.allexpenses.observe(this) { expenses ->
             expenseAdapter.ExpenseArr.submitList(expenses)
             totalexpenses = expenses.size
@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         val expenseaddcard = ExpenseaddcardBinding.inflate(layoutInflater)
         val dialog = Dialog(this)
         dialog.setContentView(expenseaddcard.root)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        val inset= InsetDrawable(ColorDrawable(Color.TRANSPARENT),50)
+        dialog.window?.setBackgroundDrawable(inset)
 
         expenseaddcard.closebtn.setOnClickListener {
             dialog.dismiss()
